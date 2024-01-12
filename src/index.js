@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import MainPage from './pages/MainPage';
+import BookmarkPage from './pages/BookmarkPage';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
         element: <MainPage></MainPage>,
       },
       {
-        path: '',
+        path: 'search/:keyword',
+        element: <MainPage />,
+      },
+      {
+        path: 'bookmark',
+        element: <BookmarkPage />,
       },
     ],
   },
