@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import unsplashAxios from '../services/unsplashAxios';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
+import Pagination from './Pagination';
+import { useParams } from 'react-router-dom';
 
 export default function Photos() {
   const [photos, setPhotos] = useState(null);
+  const { keyword } = useParams();
 
   const likePhoto = async (unsplashId) => {
     try {
@@ -46,9 +49,24 @@ export default function Photos() {
 
   const fetchRandomPhoto = async () => {
     try {
-      const response = await unsplashAxios.get('photos');
-      console.log('response', response);
-      setPhotos(response?.data);
+      if (!keyword) {
+        const response = await unsplashAxios.get('photos', {
+          params: {
+            page: 10,
+            per_page: 20,
+          },
+        });
+        console.log('response', response);
+        setPhotos(response?.data);
+      } else {
+        const response = await unsplashAxios.get('/search/photos', {
+          params: {
+            query: keyword,
+          },
+        });
+        console.log('response', response);
+        setPhotos(response?.data?.results);
+      }
     } catch (error) {
       console.error('Error fetching random photo:', error);
     }
@@ -56,11 +74,11 @@ export default function Photos() {
 
   useEffect(() => {
     fetchRandomPhoto();
-  }, []);
+  }, [keyword]);
 
   return (
     <div>
-      photos list
+      photos list {keyword ? `🔍${keyword}` : '🔥'}
       <div className="grid grid-cols-1 gap-x-4 gap-y-4 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
         {photos &&
           photos.map((photo, index) => (
@@ -74,6 +92,7 @@ export default function Photos() {
             </div>
           ))}
       </div>
+      <Pagination />
     </div>
   );
 }
