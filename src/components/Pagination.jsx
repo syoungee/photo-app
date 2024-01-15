@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Pagination({ page, setPage, totalPage }) {
-  const [currentPage, setCurrentPage] = useState(page);
+  // const [page, setPage] = useState(page);
   const [firstPage, setFirstPage] = useState(1);
   const PaginationClasses =
     'z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white';
@@ -16,6 +17,10 @@ export default function Pagination({ page, setPage, totalPage }) {
     });
   };
 
+  useEffect(() => {
+    // console.log('pagination', page, totalPage);
+  }, [page, totalPage]);
+
   return (
     <div>
       <nav aria-label="Page navigation example" className="flex justify-center">
@@ -23,10 +28,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                if (currentPage > 1) {
-                  setCurrentPage(currentPage - 1);
-                  setPage(currentPage - 1);
-                  if (firstPage === currentPage) {
+                if (page > 1) {
+                  setPage(page - 1);
+                  setPage(page - 1);
+                  if (firstPage === page) {
                     setFirstPage(firstPage - 1);
                   }
                 } else {
@@ -45,11 +50,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                setCurrentPage(firstPage);
                 setPage(firstPage);
                 scrollToTop();
               }}
-              className={currentPage === firstPage ? PaginationClasses : notIndexedClasses}
+              className={page === firstPage ? PaginationClasses : notIndexedClasses}
               disabled={firstPage > totalPage}
             >
               {firstPage}
@@ -58,11 +62,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                setCurrentPage(firstPage + 1);
                 setPage(firstPage + 1);
                 scrollToTop();
               }}
-              className={currentPage === firstPage + 1 ? PaginationClasses : notIndexedClasses}
+              className={page === firstPage + 1 ? PaginationClasses : notIndexedClasses}
               disabled={firstPage + 1 > totalPage}
             >
               {firstPage + 1}
@@ -71,11 +74,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                setCurrentPage(firstPage + 2);
                 setPage(firstPage + 2);
                 scrollToTop();
               }}
-              className={currentPage === firstPage + 2 ? PaginationClasses : notIndexedClasses}
+              className={page === firstPage + 2 ? PaginationClasses : notIndexedClasses}
               disabled={firstPage + 2 > totalPage}
             >
               {firstPage + 2}
@@ -84,11 +86,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                setCurrentPage(firstPage + 3);
                 setPage(firstPage + 3);
                 scrollToTop();
               }}
-              className={currentPage === firstPage + 3 ? PaginationClasses : notIndexedClasses}
+              className={page === firstPage + 3 ? PaginationClasses : notIndexedClasses}
               disabled={firstPage + 3 > totalPage}
             >
               {firstPage + 3}
@@ -97,11 +98,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                setCurrentPage(firstPage + 4);
                 setPage(firstPage + 4);
                 scrollToTop();
               }}
-              className={currentPage === firstPage + 4 ? PaginationClasses : notIndexedClasses}
+              className={page === firstPage + 4 ? PaginationClasses : notIndexedClasses}
               disabled={firstPage + 4 > totalPage}
             >
               {firstPage + 4}
@@ -110,11 +110,10 @@ export default function Pagination({ page, setPage, totalPage }) {
           <li>
             <button
               onClick={() => {
-                if (total_pages > currentPage) {
-                  setCurrentPage(currentPage + 1);
-                  setPage(currentPage + 1);
-                  if (currentPage + 1 >= firstPage + 5) {
-                    setFirstPage(currentPage + 1);
+                if (total_pages > page) {
+                  setPage(page + 1);
+                  if (page + 1 >= firstPage + 5) {
+                    setFirstPage(page + 1);
                   }
                 } else {
                   console.log(total_pages, '더 이상 페이지를 증가시킬 수 없습니다.');

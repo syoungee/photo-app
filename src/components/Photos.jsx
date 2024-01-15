@@ -3,7 +3,7 @@ import unsplashAxios from '../services/unsplashAxios';
 import { FaRegHeart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
 import Pagination from './Pagination';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import Modal from './Modal';
 import { useQuery } from '@tanstack/react-query';
 
@@ -14,6 +14,7 @@ export default function Photos() {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(Infinity);
   const { keyword } = useParams();
+  const location = useLocation();
   const { isLoading, error, data: photoList } = useQuery({ queryKey: ['photos', keyword || '', page], queryFn: () => fetchRandomPhoto() });
 
   const likePhoto = async (unsplashId) => {
@@ -64,6 +65,7 @@ export default function Photos() {
         });
         console.log('response', response);
         setPhotos(response?.data);
+        setPage(1);
         setTotalPage(Infinity);
         return response?.data;
       } else {
@@ -92,7 +94,10 @@ export default function Photos() {
     setModalOpen(false);
   };
 
-  useEffect(() => {}, [keyword]);
+  useEffect(() => {
+    // console.log('keyword & key', keyword, location?.hash, location?.key);
+    // console.log(location);
+  }, [keyword, location?.key]);
 
   return (
     <div>
