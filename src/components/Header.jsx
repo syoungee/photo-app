@@ -7,12 +7,10 @@ export default function Header() {
   const navigate = useNavigate();
 
   const toMainPage = () => {
-    console.log('to main page');
     navigate('/');
   };
 
   const toBookmarkPage = () => {
-    console.log('to book mark page');
     navigate('/bookmark');
   };
 

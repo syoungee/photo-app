@@ -7,14 +7,13 @@ import { useParams } from 'react-router-dom';
 import Modal from './Modal';
 import { useQuery } from '@tanstack/react-query';
 
-export default function Photos() {
+export default function LikedPhotos() {
   const [photos, setPhotos] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [photoId, setPhotoId] = useState(null);
-  const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(Infinity);
   const { keyword } = useParams();
-  const { isLoading, error, data: photoList } = useQuery({ queryKey: ['photos', keyword || '', page], queryFn: () => fetchRandomPhoto() });
+  const { isLoading, error, data: photoList } = useQuery({ queryKey: ['photos', keyword || ''], queryFn: () => fetchRandomPhoto() });
 
   const likePhoto = async (unsplashId) => {
     try {
@@ -56,28 +55,11 @@ export default function Photos() {
 
   const fetchRandomPhoto = async () => {
     try {
-      if (!keyword) {
-        const response = await unsplashAxios.get('photos', {
-          params: {
-            page: page,
-          },
-        });
-        console.log('response', response);
-        setPhotos(response?.data);
-        setTotalPage(Infinity);
-        return response?.data;
-      } else {
-        const response = await unsplashAxios.get('/search/photos', {
-          params: {
-            query: keyword,
-            page: page,
-          },
-        });
-        console.log('response', response);
-        setPhotos(response?.data?.results);
-        setTotalPage(response?.data?.total_pages);
-        return response?.data?.results;
-      }
+      const response = await unsplashAxios.get('photos');
+      console.log('response', response);
+      setPhotos(response?.data.filter((item) => item.liked_by_user));
+      setTotalPage(Infinity);
+      return response?.data;
     } catch (error) {
       console.error('Error fetching random photo:', error);
     }
@@ -116,7 +98,6 @@ export default function Photos() {
             </div>
           ))}
       </div>
-      <Pagination page={page} setPage={setPage} totalPage={totalPage} />
       <div className="min-h-screen flex items-center justify-center">
         {isModalOpen && <Modal isOpen={isModalOpen} onClose={closeModal} id={photoId} totalPage={totalPage} />}
       </div>
