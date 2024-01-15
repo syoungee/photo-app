@@ -16,6 +16,7 @@
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "tailwindcss": "^3.4.1",
+    "timeago.js": "^4.0.2",
     "unsplash-js": "^7.0.19",
     "web-vitals": "^2.1.4"
   },

@@ -4,9 +4,12 @@ import { FaRegHeart } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
 import Pagination from './Pagination';
 import { useParams } from 'react-router-dom';
+import Modal from './Modal';
 
 export default function Photos() {
   const [photos, setPhotos] = useState(null);
+  const [isModalOpen, setModalOpen] = React.useState(false);
+  const [photoId, setPhotoId] = useState(null);
   const { keyword } = useParams();
 
   const likePhoto = async (unsplashId) => {
@@ -50,12 +53,7 @@ export default function Photos() {
   const fetchRandomPhoto = async () => {
     try {
       if (!keyword) {
-        const response = await unsplashAxios.get('photos', {
-          params: {
-            page: 10,
-            per_page: 20,
-          },
-        });
+        const response = await unsplashAxios.get('photos');
         console.log('response', response);
         setPhotos(response?.data);
       } else {
@@ -72,6 +70,15 @@ export default function Photos() {
     }
   };
 
+  const openModal = (id) => {
+    setPhotoId(id);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     fetchRandomPhoto();
   }, [keyword]);
@@ -79,13 +86,13 @@ export default function Photos() {
   return (
     <div>
       photos list {keyword ? `🔍${keyword}` : '🔥'}
-      <div className="grid grid-cols-1 gap-x-4 gap-y-4 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 cursor-pointer">
         {photos &&
           photos.map((photo, index) => (
-            <div key={index} className="items-center mx-auto relative">
+            <div key={index} className="items-center mx-auto relative" onClick={() => openModal(photo.id)}>
               <img className="object-cover w-80 h-80 rounded-md" src={photo?.urls?.regular} alt={photo?.alt_description} />
               {/* <p>{photo?.description}</p> */}
-              <button onClick={() => handleClick(photo?.liked_by_user, photo.id)} className={`absolute bottom-5 right-5 z-10 text-xl`}>
+              <button onClick={() => handleClick(photo?.liked_by_user, photo.id)} className={`absolute bottom-5 right-5 text-xl`}>
                 {/* 좋아요 아이콘 */}
                 {photo?.liked_by_user ? <FaHeart color="#Ec5642" style={{ stroke: '#F2F4F6', strokeWidth: '30' }} /> : <FaRegHeart color="#F2F4F6" />}
               </button>
@@ -93,6 +100,14 @@ export default function Photos() {
           ))}
       </div>
       <Pagination />
+      <div className="min-h-screen flex items-center justify-center">
+        {isModalOpen && (
+          <Modal isOpen={isModalOpen} onClose={closeModal} id={photoId}>
+            {/* <h2 className="text-2xl font-bold mb-4">Modal Content</h2>
+            <p>This is the content of the modal.</p> */}
+          </Modal>
+        )}
+      </div>
     </div>
   );
 }
