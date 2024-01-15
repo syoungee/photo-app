@@ -7,7 +7,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const toMainPage = () => {
-    navigate('/');
+    navigate('/search');
   };
 
   const toBookmarkPage = () => {
