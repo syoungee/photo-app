@@ -3,10 +3,10 @@ import axios from 'axios';
 const unsplashAxios = axios.create({
   baseURL: 'https://api.unsplash.com/',
   params: {
-    client_id: 'pXPYu1xrwaOyiDQl0WSlbswKuInHPe3yl7880M9wQBg',
+    client_id: process.env.REACT_APP_ACCESS_KEY,
   },
   headers: {
-    Authorization: `Bearer DIUsW1AhGo7Iux9-QvvBG2ksensfw9XNqs-NYGvbG5M`,
+    Authorization: `Bearer `+ process.env.REACT_APP_BEARER_TOKEN,
   },
 });
 
