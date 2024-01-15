@@ -10,9 +10,7 @@ export default function Modal({ isOpen, onClose, children, id }) {
 
   const fetchImageData = async () => {
     try {
-      console.log(id);
       const response = await unsplashAxios.get(`/photos/${id}`, {});
-      console.log('모달 이미지 데이터 response', response);
       setImageData(response?.data);
     } catch (error) {}
   };
