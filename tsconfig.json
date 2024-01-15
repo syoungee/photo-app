@@ -19,6 +19,6 @@
       "*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/components/Logo.jsx"],
   "exclude": ["node_modules"]
 }

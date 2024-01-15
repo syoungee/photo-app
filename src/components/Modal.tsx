@@ -1,23 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import unsplashAxios from '../services/unsplashAxios';
-import { FaRegHeart } from 'react-icons/fa';
-import { FaHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { formatAgo } from '../util/date';
 
-export default function Modal({ isOpen, onClose, children, id }) {
+interface ImageData {
+  slug: string;
+  liked_by_user: boolean;
+  urls: {
+    regular: string;
+  };
+  alt_description: string;
+  height: number;
+  width: number;
+  created_at: string;
+  downloads: number;
+  tags: {
+    title: string;
+  }[];
+}
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  id: string | null;
+  children?: React.ReactNode;
+}
+
+const Modal = ({ isOpen, onClose, id, children } : ModalProps) => {
   const modalClasses = isOpen ? 'fixed inset-0 flex items-center justify-center' : 'hidden';
-  const [imageData, setImageData] = useState(null);
+  const [imageData, setImageData] = useState<ImageData | null>(null);
 
   const fetchImageData = async () => {
     try {
       const response = await unsplashAxios.get(`/photos/${id}`, {});
       setImageData(response?.data);
-    } catch (error) {}
+    } catch (error) {
+      // Handle the error
+    }
   };
 
   useEffect(() => {
     fetchImageData();
-  }, []);
+  }, [id]);
 
   return (
     <div className={modalClasses}>
@@ -28,7 +52,7 @@ export default function Modal({ isOpen, onClose, children, id }) {
           &times;
         </button>
         <h2 className="text-2xl font-bold mb-4 mx-3">{imageData && imageData?.slug}</h2>
-        <button onClick={''} className={`absolute top-8 right-5 text-xl`}>
+        <button onClick={() => {}} className={`absolute top-8 right-5 text-xl`}>
           {/* 좋아요 아이콘 */}
           {imageData?.liked_by_user ? <FaHeart color="#Ec5642" style={{ stroke: '#F2F4F6', strokeWidth: '30' }} /> : <FaRegHeart color="black" />}
         </button>
@@ -54,17 +78,15 @@ export default function Modal({ isOpen, onClose, children, id }) {
           </div>
         </div>
         <div>
-          {imageData?.tags.map((item) => (
-            <button className="bg-gray-200 py-0.5 px-1 rounded m-1">{item.title}</button>
+          {imageData?.tags.map((item, index) => (
+            <button key={index} className="bg-gray-200 py-0.5 px-1 rounded m-1">
+              {item.title}
+            </button>
           ))}
         </div>
-        {/* slug - 사진 이름 */}
-        {/* liked_by_user */}
-        {/* height * width */}
-        {/* created_at */}
-        {/* downloads */}
-        {/* tags - 배열 */}
       </div>
     </div>
   );
-}
+};
+
+export default Modal;
