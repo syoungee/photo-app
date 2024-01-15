@@ -26,7 +26,7 @@ interface ModalProps {
   children?: React.ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, id, children } : ModalProps) => {
+const Modal = ({ isOpen, onClose, id, children }: ModalProps) => {
   const modalClasses = isOpen ? 'fixed inset-0 flex items-center justify-center' : 'hidden';
   const [imageData, setImageData] = useState<ImageData | null>(null);
 
@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, id, children } : ModalProps) => {
       const response = await unsplashAxios.get(`/photos/${id}`, {});
       setImageData(response?.data);
     } catch (error) {
-      // Handle the error
+      console.log(error);
     }
   };
 
