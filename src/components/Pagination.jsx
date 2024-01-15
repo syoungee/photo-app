@@ -26,7 +26,7 @@ export default function Pagination({ page, setPage, totalPage }) {
                 if (currentPage > 1) {
                   setCurrentPage(currentPage - 1);
                   setPage(currentPage - 1);
-                  if (firstPage == currentPage) {
+                  if (firstPage === currentPage) {
                     setFirstPage(firstPage - 1);
                   }
                 } else {
