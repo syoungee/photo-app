@@ -36,7 +36,7 @@ https://unsplash.com/documentation<br/>
 
 1. `axios` - api 구현을 위해 사용
 2. `tailwind css` - css 라이브러리
-3. `timeago.js` - 업로드 몇 일 전에 되었는 지 알기 위해 사용
+3. `timeago.js` - 업로드 몇 일 전에 되었는 지 보여주기 위해 사용
 4. `tanstack/react-query` - 데이터 fetching stale time 조절을 위해 사용
 
 ## ⛰️ 어려웠던 점
