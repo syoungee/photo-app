@@ -16,14 +16,14 @@ error fix ~ing
 
 `npm install && npm start`
 
-`.env 파일에 아래 추가`
+`.env` 파일에 아래 추가
 
 ```
 REACT_APP_ACCESS_KEY=YOUR_ACCESS_KEY
 REACT_APP_BEARER_TOKEN=YOUR_BEARER_TOKEN
 ```
 
-https://unsplash.com/documentation
+https://unsplash.com/documentation<br/>
 위의 사이트에서 api key 발급 후 사용
 
 ## ✍🏻 프로젝트 요구사항
@@ -34,10 +34,10 @@ https://unsplash.com/documentation
 
 ## 📚 Libraries - 라이브러리
 
-1. axios - api 구현을 위해 사용
-2. tailwind css - css 라이브러리
-3. timeago.js - 업로드 몇 일 전에 되었는 지 알기 위해 사용
-4. tanstack/react-query - 데이터 fetching stale time 조절을 위해 사용
+1. `axios` - api 구현을 위해 사용
+2. `tailwind css` - css 라이브러리
+3. `timeago.js` - 업로드 몇 일 전에 되었는 지 알기 위해 사용
+4. `tanstack/react-query` - 데이터 fetching stale time 조절을 위해 사용
 
 ## ⛰️ 어려웠던 점
 
