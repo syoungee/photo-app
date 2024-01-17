@@ -9,8 +9,8 @@ REACT_APP_BEARER_TOKEN=YOUR_BEARER_TOKEN
 
 
 ### Libraries - 라이브러리
-
 axios - api 구현을 위해 사용
+tailwind css - css 라이브러리
 timeago.js - 업로드 몇 일 전에 되었는 지 알기 위해 사용
 tanstack/react-query - 데이터 fetching stale time 조절을 위해 사용
 
