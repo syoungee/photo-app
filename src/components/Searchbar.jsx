@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function Searchbar() {
-  const [text, setText] = useState('');
+export default function Searchbar({ text, setText }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onChange = (e) => {
     setText(e.target.value);
