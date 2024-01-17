@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+### Code
+https://github.com/syoungee/photo-app
+`npm install && npm start`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+`.env 파일에 아래 추가`
+```
+REACT_APP_ACCESS_KEY=YOUR_ACCESS_KEY
+REACT_APP_BEARER_TOKEN=YOUR_BEARER_TOKEN
+```
 
-In the project directory, you can run:
 
-### `npm start`
+### Libraries - 라이브러리
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+axios - api 구현을 위해 사용
+timeago.js - 업로드 몇 일 전에 되었는 지 알기 위해 사용
+tanstack/react-query - 데이터 fetching stale time 조절을 위해 사용
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 어려웠던 점
+1. bearer token을 얻는 과정 - 인증 토큰을 받아서 한 번 더 POST를 날리는 과정이 필요한데 이 부분을 파악하지 못해서 하루 반나절 정도 헤맸다. O-Auth를 사용하는 방법에 대해서 알게 되었다. 공식 문서에 친절하게 쓰여 있어서 잘 해결했다.
+2. react-router v6 설정 - 다양한 설정 방법이 있어서 고민하다가 Outlet 방식을 이용해서 구현했다.
+3. 컴포넌트 쪼개기 - 어디까지가 재사용하기 좋은 크기인지 감이 오지 않아서 고민하면서 작성했다.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 미흡한 부분 & 개선 사항
+1. 모든 컴포넌트 typescript 적용을 하지 못했다.
+2. react-router dom에서 같은 페이지로 이동할 때 리렌더링이 되지 않아 페이지 정보가 초기화되지 않는 이슈가 있다. 현재 willog 로고 클릭 시 동작하는 로직 부분이 이에 해당한다. 수정이 필요하다. 이를 학습하면서 useLocation에 key값을 useEffect의 의존성 배열에 넣어주었는데 해결이 되지 않았다.
