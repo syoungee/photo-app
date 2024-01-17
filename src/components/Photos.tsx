@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import unsplashAxios from '../services/unsplashAxios';
+import { useEffect, useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
-import Pagination from './Pagination';
 import { useParams, useLocation } from 'react-router-dom';
-import Modal from './Modal';
 import { useQuery } from '@tanstack/react-query';
+import unsplashAxios from '../services/unsplashAxios';
+import Pagination from './Pagination';
+import Modal from './Modal';
 
 interface Photo {
   id: string;
@@ -97,8 +97,9 @@ export default function Photos(): JSX.Element {
   };
 
   useEffect(() => {
-    // console.log('keyword & key', keyword, location?.hash, location?.key);
+    // console.log('keyword & key', keyword, location?.key, page, totalPage);
     // console.log(location);
+    setPage(1);
   }, [keyword, location?.key]);
 
   return (
