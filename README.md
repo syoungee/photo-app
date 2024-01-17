@@ -28,5 +28,6 @@ REACT_APP_BEARER_TOKEN=YOUR_BEARER_TOKEN
 2. react-router dom에서 같은 페이지로 이동할 때 리렌더링이 되지 않아 페이지 정보가 초기화되지 않는 이슈가 있다. 현재 willog 로고 클릭 시 동작하는 로직 부분이 이에 해당한다. 수정이 필요하다. 이를 학습하면서 useLocation에 key값을 useEffect의 의존성 배열에 넣어주었는데 해결이 되지 않았다.
 3. api 로직 분리
 
-이슈2 해결 완료
+✔️ 이슈2 해결 완료
+
 `/search`(메인 페이지)에서 '고양이' 키워드를 검색하고 페이지 2로 이동한 후 Willog 로고를 클릭하면 입력 창과 페이지 상태가 초기화되지 않았다. Header 컴포넌트에 text 상태를 추가하고, Header 컴포넌트 내에 SearchBar 컴포넌트를 두어 입력 창을 초기화했다. 또한 페이지 상태 초기화는 keyword 또는 useLocation의 key 값이 변경될 때 처리하도록 변경했다.
