@@ -9,7 +9,7 @@
 
 ## ⏳ 개발 기간
 
-2024.01.09 ~ 2024.01.15
+2024.01.09 ~ 2024.01.15<br/>
 error fix ~ing
 
 ## 🌈 Code
@@ -24,6 +24,7 @@ REACT_APP_BEARER_TOKEN=YOUR_BEARER_TOKEN
 ```
 
 https://unsplash.com/documentation
+위의 사이트에서 api key 발급 후 사용
 
 ## ✍🏻 프로젝트 요구사항
 
